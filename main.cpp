@@ -3,7 +3,7 @@
 
 using namespace cv;
 
-void startTutorial(int argc, char **argv);
+void displayImageFromFile(int argc, char **argv);
 void openCamera();
 
 int main(int argc, char** argv )
@@ -61,11 +61,10 @@ void openCamera(){
 }
 
 
+//takes input from console to open a file
+void displayImageFromFile(int argc, char **argv){
 
-void startTutorial(int argc, char **argv){
-
-     if ( argc != 2 )
-    {
+    if ( argc != 2 ) {
         printf("usage: DisplayImage.out <Image_Path>\n");
         return;
     }
