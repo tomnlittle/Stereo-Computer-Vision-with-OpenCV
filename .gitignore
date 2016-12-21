@@ -7,16 +7,5 @@ cmake_install.cmake
 
 CMakeCache.txt
 
-CMakeFiles/TargetDirectories.txt
-
-CMakeFiles/Makefile2
-
-CMakeFiles/main.dir/DependInfo.cmake
-
-CMakeFiles/main.dir/depend.internal
-
-CMakeFiles/main.dir/CXX.includecache
-
-CMakeFiles/main.dir/build.make
-
-CMakeFiles/CMakeDirectoryInformation.cmake
+CMakeFiles/*
+CMakeFiles/*.*
