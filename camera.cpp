@@ -16,7 +16,6 @@ Camera::~Camera(){
 }
 
 void Camera::update(){
-    
     while(threadActive){
         camera >> frame;
         usleep(UPDATE_FREQUENCY/100.00);

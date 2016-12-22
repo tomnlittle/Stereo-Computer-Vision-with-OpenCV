@@ -11,3 +11,7 @@ CMakeFiles/*
 CMakeFiles/*.*
 
 main
+
+CMakeLists.txt
+
+*.txt

@@ -28,9 +28,6 @@ int main(int argc, char** argv )
 
     Ptr<StereoBM> sbm = cv::StereoBM::create(16, 5);
 
-    
-
-    
     while(started){
         cvtColor(cam1.getFrame(), g1, CV_BGR2GRAY);
         cvtColor(cam0.getFrame(), g2, CV_BGR2GRAY);
