@@ -9,7 +9,7 @@
 using namespace cv;
 using namespace std;
 
-#define UPDATE_FREQUENCY                                        30.00 //update 30 times a second
+#define UPDATE_FREQUENCY                                        10.00 //update 30 times a second
 
 class Camera {
     public:

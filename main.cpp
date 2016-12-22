@@ -16,7 +16,7 @@ using namespace std;
 bool started = true;
 
 void displayImageFromFile(int argc, char** argv);
-void updateScreen();
+void command();
 
 int main(int argc, char** argv )
 {
@@ -24,19 +24,34 @@ int main(int argc, char** argv )
 
     Camera cam0(0);
     Camera cam1(1);
-    std::thread commandsThread(updateScreen);
+    std::thread commandsThread(command);
 
-    Ptr<StereoBM> sbm = cv::StereoBM::create(16, 5);
 
-    while(started){
+    int num_1;
+  //  int num_2;
+    sscanf (argv[1],"%d",&num_1);
+  //  sscanf (argv[2],"%d",&num_2);
+
+    printf("Num_1 = %d\n", num_1);
+   // printf("Num_2 = %d\n", num_2); */
+
+    Ptr<StereoBM> sbm = cv::StereoBM::create(128,9); // best so far 128, 9
+
+    while(started ){
         cvtColor(cam1.getFrame(), g1, CV_BGR2GRAY);
+        fastNlMeansDenoising(g1, g1, num_1, 21, 7);
+
         cvtColor(cam0.getFrame(), g2, CV_BGR2GRAY);
+        fastNlMeansDenoising(g2, g2, num_1, 21, 7);
 
         sbm->compute(g1, g2, disp);
         normalize(disp, disp, 0, 255, CV_MINMAX, CV_8U);
+        //fastNlMeansDenoising(disp, disp, num_1, 21, 7);
 
-        imshow("hello", disp);
-        waitKey(1);
+       // blur( disp, disp, Size(2,2) );
+    
+        imshow("Window", disp);
+        waitKey(5);   
     }
 
     commandsThread.join();
@@ -44,7 +59,7 @@ int main(int argc, char** argv )
     return 0;
 }
 
-void updateScreen(){
+void command(){
     char hold_value = ' ';
     while(true){
         if(hold_value == 'h'){
