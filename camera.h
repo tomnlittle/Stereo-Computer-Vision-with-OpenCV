@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
+//#include "opencv2/gpu/gpu.hpp"
 #include <thread>
 #include <iostream>
 #include <stdio.h>
@@ -9,11 +10,11 @@
 using namespace cv;
 using namespace std;
 
-#define UPDATE_FREQUENCY                                        10.00 //update 30 times a second
+#define UPDATE_FREQUENCY                                        30.00 //update 30 times a second
 
 class Camera {
     public:
-        Camera(int cameraNumber);
+        Camera(int cameraNumber, int noise);
         ~Camera();
         void update();
         void stop();
@@ -25,4 +26,5 @@ class Camera {
         std::thread updateThread;  
         cv::VideoCapture camera;  
         int updateCount;
+        int noise_reduction_level;
 };
