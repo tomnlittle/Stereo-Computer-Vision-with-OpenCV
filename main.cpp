@@ -40,7 +40,7 @@ int main(int argc, char** argv )
     //Ptr<StereoBM> sbm = cv::StereoBM::create(128,9); // best so far 128, 9
 
     Ptr<StereoBM> sbm;
-    sbm->SADWindowSize = 9;
+    //sbm->SADWindowSize = 9;
     
 
     while(started ){
