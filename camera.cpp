@@ -37,3 +37,7 @@ void Camera::stop(){
 cv::Mat3b Camera::getFrame(){
     return frame;
 }
+
+int Camera::getCount(){
+    return updateCount;
+}

@@ -21,6 +21,7 @@ void command();
 
 int main(int argc, char** argv )
 {
+    
     Mat g1, g2, disp;
 
    // printf("%d\n",gpu::getCudaEnabledDeviceCount());
@@ -31,19 +32,20 @@ int main(int argc, char** argv )
     //  sscanf (argv[2],"%d",&num_2);
 
     printf("Num_1 = %d\n", num_1);
-    // printf("Num_2 = %d\n", num_2); */
+   
 
     Camera cam0(0, num_1);
-    Camera cam1(1, num_1);
+    //Camera cam1(1, num_1);
     std::thread commandsThread(command);
 
     //Ptr<StereoBM> sbm = cv::StereoBM::create(128,9); // best so far 128, 9
 
-    Ptr<StereoBM> sbm;
+   // Ptr<StereoBM> sbm;
     //sbm->SADWindowSize = 9;
     
-
+    int temp = 0;
     while(started ){
+        /*
         cvtColor(cam1.getFrame(), g1, CV_BGR2GRAY);
         cvtColor(cam0.getFrame(), g2, CV_BGR2GRAY);
 
@@ -54,7 +56,26 @@ int main(int argc, char** argv )
        // blur( disp, disp, Size(2,2) );
     
         imshow("Window", disp);
-        waitKey(UPDATE_FREQUENCY);   
+        waitKey(UPDATE_FREQUENCY);   */
+        
+        disp = cam0.getFrame();
+        temp = cam0.getCount();
+        g1 = cam0.getFrame();
+        if(temp == cam0.getCount()){
+            g1 = cam0.getFrame();
+        }
+        temp = cam0.getCount();
+
+        g2 = cam0.getFrame();
+        if(temp == cam0.getCount()){
+            g2= cam0.getFrame();
+        }
+
+        
+
+       // cvtColor(cam0.getFrame(), disp, CV_BGR2GRAY);
+        imshow("Window", disp);
+        waitKey(UPDATE_FREQUENCY); 
     }
 
     commandsThread.join();

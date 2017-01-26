@@ -18,6 +18,7 @@ class Camera {
         ~Camera();
         void update();
         void stop();
+        int getCount();
         cv::Mat3b getFrame();
     private:
         cv::Mat3b frame;
