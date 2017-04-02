@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.0/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.2/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.7.0/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/Tom/GitHub/Stereo-Computer-Vision
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.7.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.7.2/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-camera.o: camera.cpp.o
+libs/camera.o: libs/camera.cpp.o
 
-.PHONY : camera.o
+.PHONY : libs/camera.o
 
 # target to build an object file
-camera.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/camera.cpp.o
-.PHONY : camera.cpp.o
+libs/camera.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/libs/camera.cpp.o
+.PHONY : libs/camera.cpp.o
 
-camera.i: camera.cpp.i
+libs/camera.i: libs/camera.cpp.i
 
-.PHONY : camera.i
+.PHONY : libs/camera.i
 
 # target to preprocess a source file
-camera.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/camera.cpp.i
-.PHONY : camera.cpp.i
+libs/camera.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/libs/camera.cpp.i
+.PHONY : libs/camera.cpp.i
 
-camera.s: camera.cpp.s
+libs/camera.s: libs/camera.cpp.s
 
-.PHONY : camera.s
+.PHONY : libs/camera.s
 
 # target to generate assembly for a file
-camera.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/camera.cpp.s
-.PHONY : camera.cpp.s
+libs/camera.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/libs/camera.cpp.s
+.PHONY : libs/camera.cpp.s
 
 main.o: main.cpp.o
 
@@ -186,9 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... camera.o"
-	@echo "... camera.i"
-	@echo "... camera.s"
+	@echo "... libs/camera.o"
+	@echo "... libs/camera.i"
+	@echo "... libs/camera.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

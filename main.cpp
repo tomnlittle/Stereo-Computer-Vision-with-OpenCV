@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <stdint.h>
 
-#include "camera.h"
+#include "libs/camera.h"
 
 using namespace cv;
 using namespace std;
@@ -40,21 +40,10 @@ void command();
 
 int main(int argc, char** argv )
 {
-    
-    Mat g1, g2, disp;
+    Mat g1, g2;
 
-   // printf("%d\n",gpu::getCudaEnabledDeviceCount());
-
-    int num_1;
-    //  int num_2;
-    sscanf (argv[1],"%d",&num_1);
-    //  sscanf (argv[2],"%d",&num_2);
-
-    printf("Num_1 = %d\n", num_1);
-   
-
-    Camera cam0(0, num_1);
-    //Camera cam1(1, num_1);
+    Camera cam0(0);
+    Camera cam1(1);
     std::thread commandsThread(command);
 
     //Ptr<StereoBM> sbm = cv::StereoBM::create(128,9); // best so far 128, 9
@@ -77,24 +66,11 @@ int main(int argc, char** argv )
         imshow("Window", disp);
         waitKey(UPDATE_FREQUENCY);   */
         
-        disp = cam0.getFrame();
-        temp = cam0.getCount();
-        g1 = cam0.getFrame();
-        if(temp == cam0.getCount()){
-            g1 = cam0.getFrame();
-        }
-        temp = cam0.getCount();
-
-        g2 = cam0.getFrame();
-        if(temp == cam0.getCount()){
-            g2= cam0.getFrame();
-        }
-
-        
-
-       // cvtColor(cam0.getFrame(), disp, CV_BGR2GRAY);
-        imshow("Window", disp);
-        waitKey(UPDATE_FREQUENCY); 
+        g1 = cam0.getNewFrame();     
+        g2 = cam1.getNewFrame();
+        imshow("Cam1", g1);
+        imshow("Cam2", g2);
+        waitKey(1); 
     }
 
     commandsThread.join();
@@ -103,39 +79,12 @@ int main(int argc, char** argv )
 }
 
 void command(){
-    char hold_value = ' ';
-    while(true){
-        if(hold_value == 'h'){
-			break;
-        }
-		cin >> hold_value;	
-	}
+    std::string hold_value = " ";
+    printf("Press any key to close\n");
+    std::cin >> hold_value;	
     started = false;
+    return;
 }
-
- /* 
-    char hold_value = ' ';
-	//while(true){
-		if(hold_value == 'h'){
-			start = false;
-		//	break;
-        }
-		cin >> hold_value;
-        cv::namedWindow("Display Image", WINDOW_NORMAL );
-        cv::imshow("hello", frame1);
-        printf("I tried...\n");
-	//}
-
-
-    cv::imshow("hello", frame1);
-    waitKey(0);
-
-    start = false;
-
-    cam0.join();
-    cam1.join(); */
-
-
 
 //takes input from console to open a file
 void displayImageFromFile(int argc, char** argv){

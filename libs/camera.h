@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <opencv2/opencv.hpp>
-//#include "opencv2/gpu/gpu.hpp"
 /*
  * Created on Thu Jan 26 2017 
  *
@@ -20,31 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
+#include <stdio.h>
+#include <opencv2/opencv.hpp>
 #include <thread>
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
 
-using namespace cv;
-using namespace std;
-
-#define UPDATE_FREQUENCY                                        30.00 //update 30 times a second
-
 class Camera {
     public:
-        Camera(int cameraNumber, int noise);
+        Camera( int camID = 0, float noise = 0, bool mirror = false, cv::Size photoSize = cv::Size(0,0));
         ~Camera();
-        void update();
-        void stop();
-        int getCount();
-        cv::Mat3b getFrame();
+
+        cv::Mat3b getFrame();   //returns the last completed frame
+
+        /*
+            Always returns a new frame, whereas getFrame will always load the current frame this function will block
+            until a new frame can be returned.
+        */
+        cv::Mat3b getNewFrame(); 
     private:
-        cv::Mat3b frame;
-        int cameraNumber;
-        bool threadActive;
-        std::thread updateThread;  
+        void update();
+
+        std::thread updateThread; 
+
         cv::VideoCapture camera;  
+        cv::Mat3b frame;
+        cv::Size size;
+
+        int cameraNumber;
         int updateCount;
-        int noise_reduction_level;
+        int frameNum; //Used to keep track of the frame that was last returned
+        bool threadActive;
+        bool shouldFlip;
+        float noise_reduction_level;
 };
